@@ -18,6 +18,31 @@ void fillArray(int arr[], const int len){
 }
 
 
+int findPivot(int arr[], int min, int max){
+    int pivot = min -1;
+    for (int i = min; i < max; ++i){
+        if(arr[i] < arr[max]){
+            pivot++;
+            swap(arr[i], arr[pivot]);
+        }
+    }
+    pivot++;
+    swap(arr[pivot], arr[max]);
+    return pivot;
+}
+
+
+void quickSort(int arr[], int min, int max){
+    if (min >= max){
+        return;
+    }
+    int pivot = findPivot(arr, min, max);
+    quickSort(arr, min, pivot - 1);
+    quickSort(arr, pivot + 1, max);
+
+}
+
+
 int binSearch(int arr[], int value, const int len){
     int low = 0;
     int high = len - 1;
@@ -45,6 +70,7 @@ void printArray(int arr[], const int len){
     }
     cout << "}";
 }
+
 
 
 void bubbleSort(int arr[], const int len){
@@ -167,7 +193,7 @@ int main(){
 
             case 2:
                 start = steady_clock::now();
-                bubbleSort(arr, n);
+                quickSort(arr, 0, n - 1);
                 end = steady_clock::now();
                 result = end - start;
                 printArray(arr, n);
@@ -184,7 +210,7 @@ int main(){
                 result = end - start;
                 cout << "Поиск max и min значений несортированного массива прошел за " << result.count() << " наносек.\n";
 
-                bubbleSort(arr, n);
+                quickSort(arr, 0,n - 1);
                 start = steady_clock::now();
                 mx = arr[n -1];
                 mn = arr[0];
@@ -240,7 +266,7 @@ int main(){
                 cin >> a;
                 clearStream();
                 fillArray(arr, n);
-                bubbleSort(arr, n);
+                quickSort(arr, 0, n - 1);
                 printArray(arr, n);
                 start = steady_clock::now();
                 findElement(arr, n, a);
@@ -281,6 +307,7 @@ int main(){
                 idz9(arr, n, idz_num);
                 break;
         }
+
     }
     return 0;
 }
