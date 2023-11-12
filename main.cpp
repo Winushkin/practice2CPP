@@ -18,10 +18,10 @@ void fillArray(int arr[], const int len){
 }
 
 
-int findPivot(int arr[], int min, int max){
+int findPivot(int arr[], int min, int max) {
     int pivot = min -1;
     for (int i = min; i < max; ++i){
-        if(arr[i] < arr[max]){
+        if(arr[i] < arr[max]) {
             pivot++;
             swap(arr[i], arr[pivot]);
         }
@@ -32,14 +32,13 @@ int findPivot(int arr[], int min, int max){
 }
 
 
-void quickSort(int arr[], int min, int max){
-    if (min >= max){
+void quickSort(int arr[], int min, int max) {
+    if (min >= max) {
         return;
     }
     int pivot = findPivot(arr, min, max);
     quickSort(arr, min, pivot - 1);
     quickSort(arr, pivot + 1, max);
-
 }
 
 
@@ -73,17 +72,6 @@ void printArray(int arr[], const int len){
 
 
 
-void bubbleSort(int arr[], const int len){
-
-    for (int i = 0; i < len; ++i){
-        for (int j = 0; j < len - i - 1; ++j){
-
-            if (arr[j] > arr[j + 1]){
-                swap(arr[j], arr[j + 1]);
-            }
-        }
-    }
-}
 
 
 void findExtremums(int arr[], const int len){
@@ -91,7 +79,7 @@ void findExtremums(int arr[], const int len){
     int mx = arr[0];
     int mn = arr[0];
 
-    for (int i = 0; i < len; ++i){
+    for (int i = 1; i < len; ++i){
         mx = max(mx, arr[i]);
         mn = min(mn, arr[i]);
     }
@@ -135,6 +123,26 @@ int findElement(int arr[], int len, int value){
 }
 
 
+//void idz9(int arr[], int len, int num) {
+//    for (int i = 1; i < len; i += 2) {
+//        if (i % 2) {
+//            arr[i] -= num;
+//            arr[i] *= rand() % 9 + 1;
+//        }
+//    }
+//    for (int j = 1; j < 10; ++j) {
+//        cout << "Элементы, кратные " << j << ": ";
+//        for (int i = 0; i < len; ++i) {
+//            if (!(arr[i] % j)){
+//                cout << arr[i] << " ";
+//            }
+//        }
+//        cout << "\n";
+//    }
+//
+//}
+
+
 void idz9(int arr[], int len, int num) {
     for (int i = 1; i < len; i += 2) {
         if (i % 2) {
@@ -142,18 +150,19 @@ void idz9(int arr[], int len, int num) {
             arr[i] *= rand() % 9 + 1;
         }
     }
+    int count = 0;
     for (int j = 1; j < 10; ++j) {
-        cout << "Элементы, кратные " << j << ": ";
         for (int i = 0; i < len; ++i) {
-            if (!(arr[i] % j)){
-                cout << arr[i] << " ";
+            if (arr[i] % j == 0) {
+                count++;
             }
         }
-        cout << "\n";
+        cout << count << " Эл-ов кратно " << j << "\n";
+        count = 0;
     }
 
-}
 
+}
 
 int main(){
     setlocale(LC_ALL, "ru");
@@ -166,7 +175,7 @@ int main(){
     time_mngr start, end;
     nanoseconds result;
     int low, mid, high, l_border, r_border;
-    int answer, index;
+    int index;
     int index1, index2;
     int idz_num;
 
@@ -228,7 +237,7 @@ int main(){
                 cout <<"\navg: " << avg << "\n";
                 if (binSearch(arr, avg, n) == -1) {
                     cout << "Такого элемента нет в массиве";
-                }else{
+                } else {
                     high = n - 1;
                     l_border = findLeft(arr, avg, low, mid, high);
                     r_border = findRight(arr, avg, low, mid, high);
@@ -307,7 +316,7 @@ int main(){
                 idz9(arr, n, idz_num);
                 break;
         }
-
     }
     return 0;
 }
+
